@@ -1,0 +1,18 @@
+.aboutPageContainer {
+  display: flex;
+  flex-direction: column;
+  margin-top: 20px;
+  padding: 30px;
+  width: 80%;
+  text-align: left;
+  background-color: rgb(239, 239, 238);
+  border-radius: 20px;
+}
+
+.adContainer {
+  width: 95vw;
+  height: 50px;
+  background-color: grey;
+  color: black;
+  margin-top: 20px;
+}

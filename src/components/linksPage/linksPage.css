@@ -1,0 +1,62 @@
+.contentWrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.linksPageContainer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 40px;
+  padding: 40px;
+  padding-top: 20px;
+}
+
+.adContainer {
+  width: 95vw;
+  height: 50px;
+  background-color: grey;
+  color: black;
+  margin-top: 20px;
+}
+
+.linkContainerHeading {
+  display: flex;
+  padding-left: 30px;
+  height: 40px;
+  align-items: center;
+}
+
+.allLinkContainers {
+  min-width: 250px;
+  text-align: left;
+  background-color: rgb(233, 229, 229);
+  border: 1px solid rgb(222, 218, 218);
+  border-radius: 20px;
+}
+
+.linksContainer {
+  background-color: rgb(239, 239, 238);
+  display: flex;
+  flex-direction: column;
+  flex: 0 1 auto;
+  padding-left: 30px;
+  padding-right: 30px;
+  height: calc(100% - 78px);
+  border-top: 1px solid rgb(143, 142, 142);
+  border-radius: 0px 0px 20px 20px;
+}
+
+@media (min-width: 480px) {
+  .linksPageContainer {
+    display: grid;
+    grid-template-columns: repeat(2, 2fr);
+    gap: 40px;
+  }
+
+  .allLinkContainers {
+    width: 100%;
+  }
+}

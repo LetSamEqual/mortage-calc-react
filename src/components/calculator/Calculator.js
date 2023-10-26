@@ -1,6 +1,7 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import "./Calculator.css";
 import SideBar from "../sideBarCalc/sideBarCalc";
+import Popover from "../popover/popover";
 
 import {
   calculateSalaryAfterTax,
@@ -15,6 +16,7 @@ import {
 const Calculator = () => {
   const [mortgageCalculator, setMortgageCalculator] = useState({
     salaryTotal: 0,
+    otherIncome: 0,
     currentBankBalance: 0,
     propertyPrice: 0,
     deposit: 0,
@@ -47,20 +49,40 @@ const Calculator = () => {
     notes: "",
   });
 
+  const [toLocalStorage, setToLocalStorage] = useState(true);
+
+  const setLocalStorage = () => {
+    setToLocalStorage(!toLocalStorage);
+    const shouldStore = !toLocalStorage;
+    if (localStorage.getItem("userData") === null) {
+      return;
+    }
+    localStorage.removeItem("userData");
+    localStorage.setItem("userData", JSON.stringify([shouldStore]));
+  };
+
+  useEffect(() => {
+    if (localStorage.getItem("userData") === null) {
+      return;
+    }
+    let userData = JSON.parse(localStorage.getItem("userData"));
+    if (userData[1] === undefined) {
+      setToLocalStorage(userData[0]);
+      return;
+    }
+
+    setToLocalStorage(userData[0]);
+    setMortgageCalculator(userData[1]);
+  }, []);
+
   // input handlers
 
   // converts calculation outputs to currency format on autofill
-  const convertOutputToCurrency = (value) => {
-    const valueInCurrency = Intl.NumberFormat("en-US", {
-      style: "currency",
-      currency: "USD",
-    }).format(value);
-    return valueInCurrency;
-  };
 
   // converts values to currency type in the same input field on blur
   const handleBlur = (e) => {
     let value = e.target.value;
+    let name = e.target.name;
     let parseValue = parseFloat(value.replace(/[$,]/g, ""));
     if (isNaN(parseValue)) {
       parseValue = 0;
@@ -69,27 +91,46 @@ const Calculator = () => {
       style: "currency",
       currency: "USD",
     }).format(parseValue);
+
     e.target.value = valueInCurrency;
+
+    setMortgageCalculator({
+      ...mortgageCalculator,
+      [name]: valueInCurrency,
+    });
+    if (toLocalStorage) {
+      window.localStorage.setItem(
+        "userData",
+        JSON.stringify([
+          toLocalStorage,
+          {
+            ...mortgageCalculator,
+            [name]: valueInCurrency,
+          },
+        ])
+      );
+    }
   };
 
   // converts value back to number type in the same input field on focus
   const handleFocus = (e) => {
+    let name = e.target.name;
     let value = e.target.value;
     if (isNaN(value)) {
       let parseValue = parseFloat(value.replace(/[$,]/g, ""));
       e.target.value = parseValue;
+      setMortgageCalculator({ ...mortgageCalculator, [name]: parseValue });
     }
+    e.target.select();
   };
 
   // updates corresponding state field based on change to input fields
   const handleInput = (e) => {
     const name = e.target.name;
-    const value = parseFloat(e.target.value);
-
+    const value = e.target.value;
     if (isNaN(value) || value < 0) {
       return;
     }
-
     setMortgageCalculator({
       ...mortgageCalculator,
       [name]: value,
@@ -122,7 +163,8 @@ const Calculator = () => {
   };
 
   const salaryAfterTax = calculateSalaryAfterTax(
-    mortgageCalculator.salaryTotal
+    mortgageCalculator.salaryTotal,
+    mortgageCalculator.otherIncome
   );
 
   const mortgageAmount = calculateMortgageAmount(
@@ -157,9 +199,6 @@ const Calculator = () => {
 
   return (
     <div className="calculatorContainer">
-      <div className="adContainerCalculator">
-        <h2>Ad sense</h2>
-      </div>
       <SideBar
         className="sidebarContainer"
         data={{
@@ -172,16 +211,48 @@ const Calculator = () => {
           annualContributions,
           bankBalanceAfterPurchase,
         }}
+        setLocalStorage={setLocalStorage}
+        toLocalStorage={toLocalStorage}
       />
       <div className="formContainer">
         <h2 className="formLabels">Income/assets</h2>
         <form className="calculationContainer">
-          <label>Yearly salary (ignoring super)</label>
+          <label>
+            Yearly salary (ignoring super)
+            <sup>
+              <a href="#firstDisclaimer" className="superscript">
+                1
+              </a>
+            </sup>
+          </label>
           <input
             id="yearlySalaryInput"
             type="text"
             placeholder="$0.00"
             name="salaryTotal"
+            value={mortgageCalculator.salaryTotal}
+            className="greenBorderFocus"
+            maxLength="9"
+            inputMode="numeric"
+            onKeyDown={handleKeydown}
+            onInput={handleInput}
+            onBlur={handleBlur}
+            onFocus={handleFocus}
+          />{" "}
+          <span className="errorMessage"> </span>
+          <label>
+            Other taxable income (monthly)
+            <sup>
+              <a href="#firstDisclaimer" className="superscript">
+                1
+              </a>
+            </sup>
+          </label>
+          <input
+            type="text"
+            placeholder="$0.00"
+            name="otherIncome"
+            value={mortgageCalculator.otherIncome}
             className="greenBorderFocus"
             maxLength="9"
             inputMode="numeric"
@@ -191,7 +262,6 @@ const Calculator = () => {
             onFocus={handleFocus}
           />
           <span className="errorMessage"> </span>
-
           <label>Current bank balance</label>
           <input
             type="text"
@@ -200,6 +270,7 @@ const Calculator = () => {
             className="greenBorderFocus"
             maxLength="9"
             inputMode="numeric"
+            value={mortgageCalculator.currentBankBalance}
             onChange={handleInput}
             onBlur={handleBlur}
             onFocus={handleFocus}
@@ -208,6 +279,14 @@ const Calculator = () => {
           <span className="errorMessage"> </span>
         </form>
       </div>
+      <div className="adSquare">
+        <a href="https://www.crazydomains.com.au?a=KRVS2cLNZcSNVJ7ms12%2F2pURgIDjGV0kF%2FYCa73xLp4%3D">
+          <img
+            src="//framework.dreamscape.cloud/design_framework/images/crazy/affiliates/336x280/new_domains.png"
+            alt="New Domains"
+          />
+        </a>
+      </div>
       <div className="formContainer">
         <h2 className="formLabels">Property expenses</h2>
         <form className="calculationContainer">
@@ -215,10 +294,11 @@ const Calculator = () => {
           <input
             type="text"
             name="propertyPrice"
-            placeholder="$0.00"
+            placeholder="$0.00 (required)"
             className="greenBorderFocus"
             maxLength="9"
             inputMode="numeric"
+            value={mortgageCalculator.propertyPrice}
             onChange={handleInput}
             onBlur={handleBlur}
             onFocus={handleFocus}
@@ -229,24 +309,33 @@ const Calculator = () => {
           <input
             type="text"
             name="deposit"
-            placeholder="$0.00"
+            placeholder="$0.00 (required)"
             className="greenBorderFocus"
             maxLength="9"
             inputMode="numeric"
+            value={mortgageCalculator.deposit}
             onChange={handleInput}
             onBlur={handleBlur}
             onFocus={handleFocus}
             onKeyDown={handleKeydown}
           ></input>
           <span className="errorMessage"> </span>
-          <label>Interest rate</label>
+          <div className="popoverComponent">
+            <label>Interest rate</label>
+            <Popover
+              displayedText={
+                "We recommended also checking an interest rate 1–4% higher than offered to account for any potential fluctuations in the market."
+              }
+            />
+          </div>
           <input
             type="text"
             name="interestRate"
-            placeholder="1.5%"
+            placeholder="1.5% (required)"
             className="greenBorderFocus"
             maxLength="5"
             inputMode="decimal"
+            value={mortgageCalculator.interestRate}
             onChange={handleInput}
             onKeyDown={handleKeydown}
           ></input>
@@ -255,10 +344,11 @@ const Calculator = () => {
           <input
             type="text"
             name="lengthOfMortgage"
-            placeholder="10"
+            placeholder="10 (required)"
             className="greenBorderFocus"
             maxLength="2"
             inputMode="numeric"
+            value={mortgageCalculator.lengthOfMortgage}
             onChange={handleInput}
             onKeyDown={handleKeydown}
           ></input>
@@ -271,6 +361,7 @@ const Calculator = () => {
             className="greenBorderFocus"
             maxLength="9"
             inputMode="numeric"
+            value={mortgageCalculator.strataPerQuarter}
             onChange={handleInput}
             onBlur={handleBlur}
             onFocus={handleFocus}
@@ -285,13 +376,19 @@ const Calculator = () => {
             className="greenBorderFocus"
             maxLength="9"
             inputMode="numeric"
+            value={mortgageCalculator.councilTaxPerQuarter}
             onChange={handleInput}
             onBlur={handleBlur}
             onFocus={handleFocus}
             onKeyDown={handleKeydown}
           ></input>
           <span className="errorMessage"> </span>
-          <label>LMI (if paid monthly)</label>
+          <div className="popoverComponent">
+            <label>LMI (if paid monthly) </label>
+            <Popover
+              displayedText={"See the links page for more information"}
+            />
+          </div>
           <input
             type="text"
             name="LMIIfPaidMonthly"
@@ -299,6 +396,7 @@ const Calculator = () => {
             className="greenBorderFocus"
             maxLength="9"
             inputMode="numeric"
+            value={mortgageCalculator.LMIIfPaidMonthly}
             onChange={handleInput}
             onBlur={handleBlur}
             onFocus={handleFocus}
@@ -321,6 +419,7 @@ const Calculator = () => {
               className="greenBorderFocus"
               maxLength="9"
               inputMode="numeric"
+              value={mortgageCalculator.power}
               onChange={handleInput}
               onBlur={handleBlur}
               onFocus={handleFocus}
@@ -335,6 +434,7 @@ const Calculator = () => {
               className="greenBorderFocus"
               maxLength="9"
               inputMode="numeric"
+              value={mortgageCalculator.water}
               onChange={handleInput}
               onBlur={handleBlur}
               onFocus={handleFocus}
@@ -349,6 +449,7 @@ const Calculator = () => {
               className="greenBorderFocus"
               maxLength="9"
               inputMode="numeric"
+              value={mortgageCalculator.gas}
               onChange={handleInput}
               onBlur={handleBlur}
               onFocus={handleFocus}
@@ -363,6 +464,7 @@ const Calculator = () => {
               className="greenBorderFocus"
               maxLength="9"
               inputMode="numeric"
+              value={mortgageCalculator.internet}
               onChange={handleInput}
               onBlur={handleBlur}
               onFocus={handleFocus}
@@ -377,6 +479,7 @@ const Calculator = () => {
               className="greenBorderFocus"
               maxLength="9"
               inputMode="numeric"
+              value={mortgageCalculator.phone}
               onChange={handleInput}
               onBlur={handleBlur}
               onFocus={handleFocus}
@@ -391,6 +494,7 @@ const Calculator = () => {
               className="greenBorderFocus"
               maxLength="9"
               inputMode="numeric"
+              value={mortgageCalculator.accounts}
               onChange={handleInput}
               onBlur={handleBlur}
               onFocus={handleFocus}
@@ -405,6 +509,7 @@ const Calculator = () => {
               className="greenBorderFocus"
               maxLength="9"
               inputMode="numeric"
+              value={mortgageCalculator.memberships}
               onChange={handleInput}
               onBlur={handleBlur}
               onFocus={handleFocus}
@@ -419,6 +524,7 @@ const Calculator = () => {
               className="greenBorderFocus"
               maxLength="9"
               inputMode="numeric"
+              value={mortgageCalculator.insurance}
               onChange={handleInput}
               onBlur={handleBlur}
               onFocus={handleFocus}
@@ -435,6 +541,7 @@ const Calculator = () => {
             className="greenBorderFocus"
             maxLength="9"
             inputMode="numeric"
+            value={mortgageCalculator.repayments}
             onChange={handleInput}
             onBlur={handleBlur}
             onFocus={handleFocus}
@@ -449,6 +556,7 @@ const Calculator = () => {
             className="greenBorderFocus"
             maxLength="9"
             inputMode="numeric"
+            value={mortgageCalculator.food}
             onChange={handleInput}
             onBlur={handleBlur}
             onFocus={handleFocus}
@@ -463,6 +571,7 @@ const Calculator = () => {
             className="greenBorderFocus"
             maxLength="9"
             inputMode="numeric"
+            value={mortgageCalculator.entertainment}
             onChange={handleInput}
             onBlur={handleBlur}
             onFocus={handleFocus}
@@ -477,6 +586,7 @@ const Calculator = () => {
             className="greenBorderFocus"
             maxLength="9"
             inputMode="numeric"
+            value={mortgageCalculator.travel}
             onChange={handleInput}
             onBlur={handleBlur}
             onFocus={handleFocus}
@@ -491,6 +601,7 @@ const Calculator = () => {
             className="greenBorderFocus"
             maxLength="9"
             inputMode="numeric"
+            value={mortgageCalculator.household}
             onChange={handleInput}
             onBlur={handleBlur}
             onFocus={handleFocus}
@@ -505,6 +616,7 @@ const Calculator = () => {
             className="greenBorderFocus"
             maxLength="9"
             inputMode="numeric"
+            value={mortgageCalculator.vehicle}
             onChange={handleInput}
             onBlur={handleBlur}
             onFocus={handleFocus}
@@ -519,6 +631,7 @@ const Calculator = () => {
             className="greenBorderFocus"
             maxLength="9"
             inputMode="numeric"
+            value={mortgageCalculator.other}
             onChange={handleInput}
             onBlur={handleBlur}
             onFocus={handleFocus}
@@ -534,9 +647,12 @@ const Calculator = () => {
       <div className="formContainer">
         <h2 className="formLabels">Purchase budget</h2>
         <form className="calculationContainer">
-          <label>Current bank balance</label>
-
-          <label>Transfer/stamp duty</label>
+          <div className="popoverComponent">
+            <label>Transfer/stamp duty</label>
+            <Popover
+              displayedText={"See the links page for more information"}
+            />
+          </div>
           <input
             type="text"
             name="transferStampDuty"
@@ -544,13 +660,19 @@ const Calculator = () => {
             className="greenBorderFocus"
             maxLength="9"
             inputMode="numeric"
+            value={mortgageCalculator.transferStampDuty}
             onChange={handleInput}
             onBlur={handleBlur}
             onFocus={handleFocus}
             onKeyDown={handleKeydown}
           ></input>
           <span className="errorMessage"> </span>
-          <label>Legal/conveyancer fees</label>
+          <div className="popoverComponent">
+            <label>Legal/conveyancer fees</label>
+            <Popover
+              displayedText={"See the links page for more information"}
+            />
+          </div>
           <input
             type="text"
             name="legalConveyancerFees"
@@ -558,13 +680,19 @@ const Calculator = () => {
             className="greenBorderFocus"
             maxLength="9"
             inputMode="numeric"
+            value={mortgageCalculator.legalConveyancerFees}
             onChange={handleInput}
             onBlur={handleBlur}
             onFocus={handleFocus}
             onKeyDown={handleKeydown}
           ></input>
           <span className="errorMessage"> </span>
-          <label>Property reports</label>
+          <div className="popoverComponent">
+            <label>Property reports</label>
+            <Popover
+              displayedText={"See the links page for more information"}
+            />
+          </div>
           <input
             type="text"
             name="propertyReports"
@@ -572,6 +700,7 @@ const Calculator = () => {
             className="greenBorderFocus"
             maxLength="9"
             inputMode="numeric"
+            value={mortgageCalculator.propertyReports}
             onChange={handleInput}
             onBlur={handleBlur}
             onFocus={handleFocus}
@@ -586,6 +715,7 @@ const Calculator = () => {
             className="greenBorderFocus"
             maxLength="9"
             inputMode="numeric"
+            value={mortgageCalculator.decorating}
             onChange={handleInput}
             onBlur={handleBlur}
             onFocus={handleFocus}
@@ -600,6 +730,7 @@ const Calculator = () => {
             className="greenBorderFocus"
             maxLength="9"
             inputMode="numeric"
+            value={mortgageCalculator.renovations}
             onChange={handleInput}
             onBlur={handleBlur}
             onFocus={handleFocus}
@@ -614,6 +745,7 @@ const Calculator = () => {
             className="greenBorderFocus"
             maxLength="9"
             inputMode="numeric"
+            value={mortgageCalculator.LMIIfPaidYearly}
             onChange={handleInput}
             onBlur={handleBlur}
             onFocus={handleFocus}
@@ -628,9 +760,28 @@ const Calculator = () => {
             wrap="soft"
             maxLength="250"
             className="additionalNotes"
+            value={mortgageCalculator.notes}
             onChange={handleInputTextField}
           ></textarea>
         </form>
+      </div>
+      <div className="disclaimersContainer">
+        <h2>Disclaimers and notes</h2>
+        <ol>
+          <li id="firstDisclaimer">
+            The rates used here are for Australian residents only.
+          </li>
+          <li id="secondDisclaimer">
+            By default, this site saves the information entered above to your
+            personal device. The information is not stored externally by this
+            site or provided to third parties. This feature exists solely to
+            provide a seamless experience between uses. You can disable this
+            feature and delete any data saved to your device by this site (other
+            than your preference to use this site with this default feature
+            disabled) by using the toggle button at the top right of the ’Your
+            stats‘ sidebar on this page.
+          </li>
+        </ol>
       </div>
     </div>
   );

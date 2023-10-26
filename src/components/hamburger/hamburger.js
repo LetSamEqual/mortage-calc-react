@@ -4,7 +4,7 @@ import { useLocation, Link } from "react-router-dom";
 import Button from "../button/button";
 
 const Hamburger = () => {
-  const [dropDownClicked, setDropDownCLicked] = useState(false);
+  const [dropDownClicked, setDropDownClicked] = useState(false);
   const [buttonDisabled, setButtonDisabled] = useState({
     calculator: true,
     links: false,
@@ -12,7 +12,7 @@ const Hamburger = () => {
   });
 
   const onClick = () => {
-    setDropDownCLicked(!dropDownClicked);
+    setDropDownClicked(!dropDownClicked);
   };
 
   const location = useLocation();
@@ -37,6 +37,7 @@ const Hamburger = () => {
         about: true,
       });
     }
+    setDropDownClicked(false);
   };
 
   useEffect(() => {
@@ -46,7 +47,7 @@ const Hamburger = () => {
   return (
     <div className="hamburgerMenuContainer">
       <label className="hamburgerMenu">
-        <input type="checkbox" />
+        <input type="checkbox" onChange={onClick} checked={dropDownClicked} />
       </label>
       <aside className="sidebar">
         <nav className="navContainer">

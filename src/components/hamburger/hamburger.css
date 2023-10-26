@@ -16,9 +16,9 @@
   --bar-width: 60px;
   --bar-height: 8px;
   --hamburger-gap: 6px;
-  --foreground: #333;
+  --foreground: #272727;
   --background: white;
-  --hamburger-margin: 10px;
+  --hamburger-margin: 15px;
   --animation-timing: 200ms ease-in-out;
   --hamburger-height: calc(
     (var(--bar-height) * 3 + (var(--hamburger-gap) * 2))
@@ -93,12 +93,12 @@
 
 .sidebar {
   transition: translate var(--animation-timing);
-  translate: 100%;
+  translate: 110%;
   padding: 0.5rem 0rem;
   padding-top: calc(var(--hamburger-height) + var(--hamburger-margin) + 5rem);
   background-color: var(--foreground);
-  color: var(--background);
-  width: 15rem;
+  color: var(--foreground);
+  width: 10rem;
   height: 100vh;
   position: absolute;
   right: 0;
@@ -117,8 +117,13 @@
   gap: 1.5rem;
 }
 
-@media (max-width: 600px) {
+@media (min-width: 700px) {
   .sidebar {
-    width: 10rem;
+    width: 15rem;
+  }
+
+  .hamburgerMenu {
+    top: 35px;
+    right: 25px;
   }
 }

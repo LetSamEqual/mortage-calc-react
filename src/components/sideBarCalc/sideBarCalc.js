@@ -1,6 +1,8 @@
 import "./sideBarCalc.css";
+import HideSidebar from "../hideSidebarButton/hideSidebarButton";
+import { useState } from "react";
 
-const SideBar = ({ data }) => {
+const SideBar = ({ data, setLocalStorage, toLocalStorage }) => {
   const {
     salaryAfterTax,
     mortgageAmount,
@@ -20,69 +22,101 @@ const SideBar = ({ data }) => {
     return valueInCurrency;
   };
 
+  const [sidebarHidden, setSidebarHidden] = useState(false);
+
+  const handleSidebarHidden = () => {
+    setSidebarHidden(!sidebarHidden);
+  };
+
   return (
-    <div className="calculatedValuesContainer">
-      <h2 className="sideBarHeadingH2 mobileInvisible">
-        Simple net monthly income: {convertOutputToCurrency(salaryAfterTax)}
-      </h2>
-      {/* <h3 className="sideBarHeadingH3">
-        {" "}
-        {convertOutputToCurrency(salaryAfterTax)}
-      </h3> */}
-      <h2 className="sideBarHeadingH2 mobileInvisible">
-        Mortgage amount: {convertOutputToCurrency(mortgageAmount)}
-      </h2>
-      {/* <h3 className="sideBarHeadingH3">
-        {convertOutputToCurrency(mortgageAmount)}
-      </h3> */}
-      <h2 className="sideBarHeadingH2">
-        Monthly mortgage repayments:{" "}
-        {convertOutputToCurrency(monthlyMortgageRepayments)}
-      </h2>
-      {/* <h3 className="sideBarHeadingH3">
-        {" "}
-        {convertOutputToCurrency(monthlyMortgageRepayments)}
-      </h3> */}
-      <h2 className="sideBarHeadingH2">
-        Total monthly property expenses:{" "}
-        {convertOutputToCurrency(monthlyPropertyExpenses)}
-      </h2>
-      {/* <h3 className="sideBarHeadingH3">
-        {" "}
-        {convertOutputToCurrency(monthlyPropertyExpenses)}
-      </h3> */}
-      <h2 className="sideBarHeadingH2">
-        Total monthly personal expenses:{" "}
-        {convertOutputToCurrency(monthlyPersonalExpenses)}
-      </h2>
-      {/* <h3 className="sideBarHeadingH3">
-        {" "}
-        {convertOutputToCurrency(monthlyPersonalExpenses)}
-      </h3> */}
-      <h2 className="sideBarHeadingH2">
-        Monthly contribution to savings:{" "}
-        {convertOutputToCurrency(monthlyContributions)}
-      </h2>
-      {/* <h3 className="sideBarHeadingH3">
-        {" "}
-        {convertOutputToCurrency(monthlyContributions)}
-      </h3> */}
-      <h2 className="sideBarHeadingH2 mobileInvisible">
-        Annual contribution to savings:{" "}
-        {convertOutputToCurrency(annualContributions)}
-      </h2>
-      {/* <h3 className="sideBarHeadingH3">
-        {" "}
-        {convertOutputToCurrency(annualContributions)}
-      </h3> */}
-      <h2 className="sideBarHeadingH2 mobileInvisible">
-        Bank balance after purchase:{" "}
-        {convertOutputToCurrency(bankBalanceAfterPurchase)}
-      </h2>
-      {/* <h3 className="sideBarHeadingH3">
-        {" "}
-        {convertOutputToCurrency(bankBalanceAfterPurchase)}
-      </h3> */}
+    <div
+      className={`calculatedValuesContainer ${
+        sidebarHidden ? "sidebarHidden" : ""
+      }`}
+    >
+      <div className="hideSidebarComponentContainer">
+        <HideSidebar
+          handleSidebarHidden={handleSidebarHidden}
+          sidebarHidden={sidebarHidden}
+        />
+      </div>
+
+      <div className="toggleContainer">
+        <label className="switch">
+          <input
+            type="checkbox"
+            className="localStorageToggle"
+            onChange={setLocalStorage}
+            checked={toLocalStorage}
+          />
+          <span className="slider round"></span>
+        </label>
+        <p>
+          {toLocalStorage
+            ? "Automatic saves are enabled"
+            : "Automatic saves are disabled"}
+          <sup>
+            <a href="#secondDisclaimer" className="superscript">
+              2
+            </a>
+          </sup>
+        </p>
+      </div>
+      <h1 className="sideBarHeading">Your stats</h1>
+      <div className="valueContainers">
+        <h2 className="sideBarHeadingH2 ">Simple net monthly income: </h2>
+        <span className="finalNumber">
+          {convertOutputToCurrency(salaryAfterTax)}
+        </span>
+      </div>
+
+      <div className="valueContainers">
+        <h2 className="sideBarHeadingH2">Mortgage amount: </h2>
+        <span className="finalNumber">
+          {convertOutputToCurrency(mortgageAmount)}
+        </span>
+      </div>
+
+      <div className="valueContainers">
+        <h2 className="sideBarHeadingH2">Monthly mortgage repayments: </h2>
+        <span className="finalNumber">
+          {convertOutputToCurrency(monthlyMortgageRepayments)}
+        </span>
+      </div>
+      <div className="valueContainers">
+        <h2 className="sideBarHeadingH2">Total monthly property expenses: </h2>
+        <span className="finalNumber">
+          {convertOutputToCurrency(monthlyPropertyExpenses)}
+        </span>
+      </div>
+
+      <div className="valueContainers">
+        <h2 className="sideBarHeadingH2">Total monthly personal expenses: </h2>
+        <span className="finalNumber">
+          {convertOutputToCurrency(monthlyPersonalExpenses)}
+        </span>
+      </div>
+
+      <div className="valueContainers">
+        <h2 className="sideBarHeadingH2">Monthly contribution to savings: </h2>
+        <span className="finalNumber">
+          {convertOutputToCurrency(monthlyContributions)}
+        </span>
+      </div>
+
+      <div className="valueContainers">
+        <h2 className="sideBarHeadingH2 ">Annual contribution to savings: </h2>
+        <span className="finalNumber">
+          {convertOutputToCurrency(annualContributions)}
+        </span>
+      </div>
+
+      <div className="valueContainers">
+        <h2 className="sideBarHeadingH2 ">Bank balance after purchase: </h2>
+        <span className="finalNumber">
+          {convertOutputToCurrency(bankBalanceAfterPurchase)}
+        </span>
+      </div>
     </div>
   );
 };

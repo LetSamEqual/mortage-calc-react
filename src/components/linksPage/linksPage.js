@@ -12,6 +12,7 @@ const LinksPage = () => {
           <div className="linksContainer">
             <p>
               <a
+                className="link"
                 href="https://conveyancing.com.au/tools/stamp-duty-calculator"
                 target="_blank"
                 rel="noreferrer"

@@ -17,7 +17,7 @@
 }
 
 .button:disabled {
-  background: #333;
+  background: #ff595aff;
   color: white;
   cursor: default;
 }

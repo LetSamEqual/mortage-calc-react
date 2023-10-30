@@ -52,9 +52,17 @@ const Calculator = () => {
   const [toLocalStorage, setToLocalStorage] = useState(true);
 
   const setLocalStorage = () => {
-    setToLocalStorage(!toLocalStorage);
     const shouldStore = !toLocalStorage;
+    setToLocalStorage(!toLocalStorage);
+
     if (localStorage.getItem("userData") === null) {
+      return;
+    }
+    if (shouldStore === true) {
+      localStorage.setItem(
+        "userData",
+        JSON.stringify([shouldStore, mortgageCalculator])
+      );
       return;
     }
     localStorage.removeItem("userData");
@@ -112,6 +120,24 @@ const Calculator = () => {
     }
   };
 
+  const handleBlurNotCurrency = (e) => {
+    let value = e.target.value;
+    let name = e.target.name;
+
+    if (toLocalStorage) {
+      window.localStorage.setItem(
+        "userData",
+        JSON.stringify([
+          toLocalStorage,
+          {
+            ...mortgageCalculator,
+            [name]: value,
+          },
+        ])
+      );
+    }
+  };
+
   // converts value back to number type in the same input field on focus
   const handleFocus = (e) => {
     let name = e.target.name;
@@ -121,15 +147,18 @@ const Calculator = () => {
       e.target.value = parseValue;
       setMortgageCalculator({ ...mortgageCalculator, [name]: parseValue });
     }
-    e.target.select();
+    // e.target.setSelectionRange(0, 9999);
   };
 
   // updates corresponding state field based on change to input fields
   const handleInput = (e) => {
     const name = e.target.name;
-    const value = e.target.value;
+    let value = e.target.value;
+    if (typeof value === "string") {
+      value = parseFloat(value);
+    }
     if (isNaN(value) || value < 0) {
-      return;
+      value = 0;
     }
     setMortgageCalculator({
       ...mortgageCalculator,
@@ -336,6 +365,7 @@ const Calculator = () => {
             maxLength="5"
             inputMode="decimal"
             value={mortgageCalculator.interestRate}
+            onBlur={handleBlurNotCurrency}
             onChange={handleInput}
             onKeyDown={handleKeydown}
           ></input>
@@ -349,6 +379,7 @@ const Calculator = () => {
             maxLength="2"
             inputMode="numeric"
             value={mortgageCalculator.lengthOfMortgage}
+            onBlur={handleBlurNotCurrency}
             onChange={handleInput}
             onKeyDown={handleKeydown}
           ></input>
@@ -384,7 +415,7 @@ const Calculator = () => {
           ></input>
           <span className="errorMessage"> </span>
           <div className="popoverComponent">
-            <label>LMI (if paid monthly) </label>
+            <label>Lenders Mortgage Insurance (LMI), if paid monthly </label>
             <Popover
               displayedText={"See the links page for more information"}
             />
@@ -410,128 +441,127 @@ const Calculator = () => {
 
         <form className="calculationContainer">
           <h3 className="billsFormLabels">Bills</h3>
-          <div className="billsFormContainer">
-            <label>Power</label>
-            <input
-              type="text"
-              name="power"
-              placeholder="$0.00"
-              className="greenBorderFocus"
-              maxLength="9"
-              inputMode="numeric"
-              value={mortgageCalculator.power}
-              onChange={handleInput}
-              onBlur={handleBlur}
-              onFocus={handleFocus}
-              onKeyDown={handleKeydown}
-            ></input>
-            <span className="errorMessage"> </span>
-            <label>Water</label>
-            <input
-              type="text"
-              name="water"
-              placeholder="$0.00"
-              className="greenBorderFocus"
-              maxLength="9"
-              inputMode="numeric"
-              value={mortgageCalculator.water}
-              onChange={handleInput}
-              onBlur={handleBlur}
-              onFocus={handleFocus}
-              onKeyDown={handleKeydown}
-            ></input>
-            <span className="errorMessage"> </span>
-            <label>Gas</label>
-            <input
-              type="text"
-              name="gas"
-              placeholder="$0.00"
-              className="greenBorderFocus"
-              maxLength="9"
-              inputMode="numeric"
-              value={mortgageCalculator.gas}
-              onChange={handleInput}
-              onBlur={handleBlur}
-              onFocus={handleFocus}
-              onKeyDown={handleKeydown}
-            ></input>
-            <span className="errorMessage"> </span>
-            <label>Internet</label>
-            <input
-              type="text"
-              name="internet"
-              placeholder="$0.00"
-              className="greenBorderFocus"
-              maxLength="9"
-              inputMode="numeric"
-              value={mortgageCalculator.internet}
-              onChange={handleInput}
-              onBlur={handleBlur}
-              onFocus={handleFocus}
-              onKeyDown={handleKeydown}
-            ></input>
-            <span className="errorMessage"> </span>
-            <label>Phone plan</label>
-            <input
-              type="text"
-              name="phone"
-              placeholder="$0.00"
-              className="greenBorderFocus"
-              maxLength="9"
-              inputMode="numeric"
-              value={mortgageCalculator.phone}
-              onChange={handleInput}
-              onBlur={handleBlur}
-              onFocus={handleFocus}
-              onKeyDown={handleKeydown}
-            ></input>
-            <span className="errorMessage"> </span>
-            <label>Accounts (streaming)</label>
-            <input
-              type="text"
-              name="accounts"
-              placeholder="$0.00"
-              className="greenBorderFocus"
-              maxLength="9"
-              inputMode="numeric"
-              value={mortgageCalculator.accounts}
-              onChange={handleInput}
-              onBlur={handleBlur}
-              onFocus={handleFocus}
-              onKeyDown={handleKeydown}
-            ></input>
-            <span className="errorMessage"> </span>
-            <label>Memberships</label>
-            <input
-              type="text"
-              name="memberships"
-              placeholder="$0.00"
-              className="greenBorderFocus"
-              maxLength="9"
-              inputMode="numeric"
-              value={mortgageCalculator.memberships}
-              onChange={handleInput}
-              onBlur={handleBlur}
-              onFocus={handleFocus}
-              onKeyDown={handleKeydown}
-            ></input>
-            <span className="errorMessage"> </span>
-            <label>Insurance</label>
-            <input
-              type="text"
-              name="insurance"
-              placeholder="$0.00"
-              className="greenBorderFocus"
-              maxLength="9"
-              inputMode="numeric"
-              value={mortgageCalculator.insurance}
-              onChange={handleInput}
-              onBlur={handleBlur}
-              onFocus={handleFocus}
-              onKeyDown={handleKeydown}
-            ></input>
-            <span className="errorMessage"> </span>
-          </div>
+
+          <label>Power</label>
+          <input
+            type="text"
+            name="power"
+            placeholder="$0.00"
+            className="greenBorderFocus"
+            maxLength="9"
+            inputMode="numeric"
+            value={mortgageCalculator.power}
+            onChange={handleInput}
+            onBlur={handleBlur}
+            onFocus={handleFocus}
+            onKeyDown={handleKeydown}
+          ></input>
+          <span className="errorMessage"> </span>
+          <label>Water</label>
+          <input
+            type="text"
+            name="water"
+            placeholder="$0.00"
+            className="greenBorderFocus"
+            maxLength="9"
+            inputMode="numeric"
+            value={mortgageCalculator.water}
+            onChange={handleInput}
+            onBlur={handleBlur}
+            onFocus={handleFocus}
+            onKeyDown={handleKeydown}
+          ></input>
+          <span className="errorMessage"> </span>
+          <label>Gas</label>
+          <input
+            type="text"
+            name="gas"
+            placeholder="$0.00"
+            className="greenBorderFocus"
+            maxLength="9"
+            inputMode="numeric"
+            value={mortgageCalculator.gas}
+            onChange={handleInput}
+            onBlur={handleBlur}
+            onFocus={handleFocus}
+            onKeyDown={handleKeydown}
+          ></input>
+          <span className="errorMessage"> </span>
+          <label>Internet</label>
+          <input
+            type="text"
+            name="internet"
+            placeholder="$0.00"
+            className="greenBorderFocus"
+            maxLength="9"
+            inputMode="numeric"
+            value={mortgageCalculator.internet}
+            onChange={handleInput}
+            onBlur={handleBlur}
+            onFocus={handleFocus}
+            onKeyDown={handleKeydown}
+          ></input>
+          <span className="errorMessage"> </span>
+          <label>Phone plan</label>
+          <input
+            type="text"
+            name="phone"
+            placeholder="$0.00"
+            className="greenBorderFocus"
+            maxLength="9"
+            inputMode="numeric"
+            value={mortgageCalculator.phone}
+            onChange={handleInput}
+            onBlur={handleBlur}
+            onFocus={handleFocus}
+            onKeyDown={handleKeydown}
+          ></input>
+          <span className="errorMessage"> </span>
+          <label>Accounts (streaming)</label>
+          <input
+            type="text"
+            name="accounts"
+            placeholder="$0.00"
+            className="greenBorderFocus"
+            maxLength="9"
+            inputMode="numeric"
+            value={mortgageCalculator.accounts}
+            onChange={handleInput}
+            onBlur={handleBlur}
+            onFocus={handleFocus}
+            onKeyDown={handleKeydown}
+          ></input>
+          <span className="errorMessage"> </span>
+          <label>Memberships</label>
+          <input
+            type="text"
+            name="memberships"
+            placeholder="$0.00"
+            className="greenBorderFocus"
+            maxLength="9"
+            inputMode="numeric"
+            value={mortgageCalculator.memberships}
+            onChange={handleInput}
+            onBlur={handleBlur}
+            onFocus={handleFocus}
+            onKeyDown={handleKeydown}
+          ></input>
+          <span className="errorMessage"> </span>
+          <label>Insurance</label>
+          <input
+            type="text"
+            name="insurance"
+            placeholder="$0.00"
+            className="greenBorderFocus"
+            maxLength="9"
+            inputMode="numeric"
+            value={mortgageCalculator.insurance}
+            onChange={handleInput}
+            onBlur={handleBlur}
+            onFocus={handleFocus}
+            onKeyDown={handleKeydown}
+          ></input>
+          <span className="errorMessage"> </span>
 
           <label>Repayments</label>
           <input
@@ -690,7 +720,7 @@ const Calculator = () => {
           <div className="popoverComponent">
             <label>Property reports</label>
             <Popover
-              displayedText={"See the links page for more information"}
+              displayedText={`See the links page for more information`}
             />
           </div>
           <input
@@ -737,7 +767,7 @@ const Calculator = () => {
             onKeyDown={handleKeydown}
           ></input>
           <span className="errorMessage"> </span>
-          <label>LMI (if paid upfront)</label>
+          <label>LMI, if paid upfront</label>
           <input
             type="text"
             name="LMIIfPaidYearly"
@@ -775,11 +805,11 @@ const Calculator = () => {
             By default, this site saves the information entered above to your
             personal device. The information is not stored externally by this
             site or provided to third parties. This feature exists solely to
-            provide a seamless experience between uses. You can disable this
+            ensure a seamless experience between uses. You can disable this
             feature and delete any data saved to your device by this site (other
             than your preference to use this site with this default feature
             disabled) by using the toggle button at the top right of the ’Your
-            stats‘ sidebar on this page.
+            stats‘ window on this page.
           </li>
         </ol>
       </div>

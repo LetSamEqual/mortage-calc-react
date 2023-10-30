@@ -1,23 +1,15 @@
 // helper function to calculate monthly salary after tax
 
-const convertOutputToCurrency = (value) => {
-  const valueInCurrency = Intl.NumberFormat("en-US", {
-    style: "currency",
-    currency: "USD",
-  }).format(value);
-  return valueInCurrency;
-};
-
 const calculateSalaryAfterTax = (userSalary, otherIncome) => {
   let personalSalary = userSalary;
   let other = otherIncome;
 
   let total;
-  if (isNaN(personalSalary)) {
+  if (typeof personalSalary === "string") {
     personalSalary = parseFloat(personalSalary.replace(/[$,]/g, ""));
   }
 
-  if (isNaN(other)) {
+  if (typeof other === "string") {
     other = parseFloat(other.replace(/[$,]/g, ""));
   }
   if (typeof personalSalary !== "number") {
@@ -78,11 +70,17 @@ const calculateSalaryAfterTax = (userSalary, otherIncome) => {
 const calculateMortgageAmount = (price, dep) => {
   let propertyPrice = price;
   let deposit = dep;
-  if (isNaN(propertyPrice)) {
+  if (typeof propertyPrice === "string") {
     propertyPrice = parseFloat(price.replace(/[$,]/g, ""));
   }
-  if (isNaN(deposit)) {
+  if (typeof deposit === "string") {
     deposit = parseFloat(dep.replace(/[$,]/g, ""));
+  }
+  if (typeof propertyPrice !== "number") {
+    propertyPrice = parseFloat(propertyPrice);
+  }
+  if (typeof deposit !== "number") {
+    deposit = parseFloat(deposit);
   }
   const mortgageAmount = propertyPrice - deposit;
   return mortgageAmount;
@@ -92,14 +90,23 @@ const calculateMonthlyMortgageRepayments = (mortgage, interest, years) => {
   let mortgageAmount = mortgage;
   let interestRate = interest;
   let mortageInYears = years;
-  if (isNaN(mortgageAmount)) {
+  if (typeof mortgageAmount === "string") {
     mortgageAmount = parseFloat(mortgageAmount.replace(/[$,]/g, ""));
   }
-  if (isNaN(interestRate)) {
+  if (typeof interestRate === "string") {
     interestRate = parseFloat(interestRate.replace(/[$,]/g, ""));
   }
-  if (isNaN(mortageInYears)) {
+  if (typeof mortageInYears === "string") {
     mortageInYears = parseFloat(mortageInYears.replace(/[$,]/g, ""));
+  }
+  if (typeof mortgageAmount !== "number") {
+    mortgageAmount = parseFloat(mortgageAmount);
+  }
+  if (typeof interestRate !== "number") {
+    interestRate = parseFloat(interestRate);
+  }
+  if (typeof mortageInYears !== "number") {
+    mortageInYears = parseFloat(mortageInYears);
   }
   if (mortgageAmount <= 0 || interestRate <= 0 || mortageInYears <= 0) {
     return 0;
@@ -126,19 +133,31 @@ const calculateMonthlyPropertyExpenses = (
   let councilTax = councilTaxPerQuarter;
   let lmi = LMIIfPaidMonthly;
 
-  if (isNaN(monthlyMortgageRepayments)) {
+  if (typeof monthlyMortgageRepayments === "string") {
     monthlyMortgageRepayments = parseFloat(
       monthlyMortgageRepayments.replace(/[$,]/g, "")
     );
   }
-  if (isNaN(strata)) {
+  if (typeof strata === "string") {
     strata = parseFloat(strata.replace(/[$,]/g, ""));
   }
-  if (isNaN(councilTax)) {
+  if (typeof councilTax === "string") {
     councilTax = parseFloat(councilTax.replace(/[$,]/g, ""));
   }
-  if (isNaN(lmi)) {
+  if (typeof lmi === "string") {
     lmi = parseFloat(lmi.replace(/[$,]/g, ""));
+  }
+  if (typeof monthlyMortgageRepayments !== "number") {
+    monthlyMortgageRepayments = parseFloat(monthlyMortgageRepayments);
+  }
+  if (typeof strata !== "number") {
+    strata = parseFloat(strata);
+  }
+  if (typeof councilTax !== "number") {
+    councilTax = parseFloat(councilTax);
+  }
+  if (typeof lmi !== "number") {
+    lmi = parseFloat(lmi);
   }
 
   const totalExpenses =
@@ -182,7 +201,7 @@ const calculateMonthlyPersonalExpenses = ({
   ];
 
   const formattedArray = expensesArray.map((el) => {
-    if (isNaN(el)) {
+    if (typeof el === "string") {
       el = parseFloat(el.replace(/[$,]/g, ""));
       return el;
     }
@@ -201,7 +220,7 @@ const calculateMonthlyContribution = (
 ) => {
   const unformattedArray = [salary, propertyExpenses, personalExpenses];
   const formattedArray = unformattedArray.map((el) => {
-    if (isNaN(el)) {
+    if (typeof el === "string") {
       el = parseFloat(el.replace(/[$,]/g, ""));
       return el;
     }
@@ -237,14 +256,14 @@ const calculateBankBalanceAfterPurchase = ({
     LMIIfPaidYearly,
   ];
   const formattedArray = unformattedArray.map((el) => {
-    if (isNaN(el)) {
+    if (typeof el === "string") {
       el = parseFloat(el.replace(/[$,]/g, ""));
       return el;
     }
     return parseFloat(el);
   });
 
-  const total = formattedArray.reduce((sum, el) => sum - el, 0);
+  const total = formattedArray.reduce((sum, el) => sum - el);
 
   return total;
 };

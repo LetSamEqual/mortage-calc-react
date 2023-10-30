@@ -40,7 +40,7 @@
 
 .hamburgerMenu:has(input:checked) {
   --foreground: white;
-  --background: #333;
+  --background: #272727;
 }
 
 .hamburger-menu:has(input:focus-visible)::before,

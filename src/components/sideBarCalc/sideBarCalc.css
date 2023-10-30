@@ -3,16 +3,16 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: space-between;
+  justify-content: space-around;
   bottom: 0;
   width: 100%;
   height: auto;
   padding-left: 20px;
   padding-bottom: 15px;
-  font-size: 0.75rem;
+  font-size: calc(10px + 6 * ((100vw - 520px) / 680));
+  font-family: "Open Sans", "Montserrat", sans-serif;
   color: black;
   z-index: 5;
-  font-size: 0.6rem;
   text-align: left;
   background: rgba(228, 221, 215, 0.72);
   box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
@@ -24,10 +24,10 @@
 }
 
 .sideBarHeading {
+  margin: 0px;
   border-bottom: 1px solid black;
   width: 90%;
   text-align: center;
-  padding-bottom: 5px;
 }
 
 .valueContainers {
@@ -35,24 +35,28 @@
   flex-direction: row;
   justify-content: space-between;
   width: 90%;
+  padding: 5px;
 }
 
 .finalNumber {
-  font-size: 1.5rem;
+  font-family: "Open Sans", sans-serif;
+  font-size: calc(10px + 6 * ((100vw - 120px) / 680));
   display: inline;
   align-self: flex-end;
   text-align: right;
+  text-decoration: solid;
+  align-self: center;
+  justify-self: center;
+  font-weight: bold;
 }
 
 .sideBarHeadingH2 {
+  font-family: "Open Sans", "Montserrat", sans-serif;
   margin: 0px;
   padding: 0px;
+  padding-right: 10px;
   display: inline;
-}
-
-.sideBarHeadingH3 {
-  margin: 0px;
-  padding: 0px;
+  width: 70%;
 }
 
 /* .mobileInvisible {
@@ -69,7 +73,7 @@
   flex-direction: column;
   align-items: flex-end;
   margin-right: 20px;
-  margin-top: 10px;
+  margin-top: 0px;
 }
 .switch {
   position: relative;
@@ -125,6 +129,16 @@
   transform: translateX(2px);
 }
 
+.automaticSavesNotification {
+  font-size: 0.8rem;
+}
+
+.superscript {
+  font-size: 0.7rem;
+  color: black;
+  padding-left: 1px;
+}
+
 /* Rounded sliders */
 .slider.round {
   border-radius: 34px;
@@ -143,6 +157,11 @@
   transition: transform 0.4s ease-in-out;
   transform: translate(0%, 95%);
 }
+.localStorageToggle:checked + .slider:before {
+  -webkit-transform: translateX(20px);
+  -ms-transform: translateX(20px);
+  transform: translateX(20px);
+}
 
 @media (min-width: 1300px) {
   .mobileInvisible {
@@ -153,26 +172,34 @@
   }
 
   .calculatedValuesContainer {
-    font-size: 0.9rem;
+    font-size: 0.85rem;
     right: 20px;
     width: 40%;
-    height: 100%;
-    padding: 0px;
-    padding-top: 150px;
-    padding-bottom: 60px;
+    height: calc(100vh - 90px);
+    padding-top: 20px;
+    padding-bottom: 5%;
     background: rgba(228, 221, 215, 0.72);
     box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
     backdrop-filter: blur(13.9px);
     -webkit-backdrop-filter: blur(13.9px);
   }
-  /* .finalNumber {
-    font-size: 1.5rem;
-    align-self: flex-end;
+
+  .valueContainers {
+    padding: 0px;
   }
 
   .sideBarHeadingH2 {
-    margin-left: 50px;
-  } */
+    padding-right: 10px;
+  }
+
+  .toggleContainer {
+    align-self: flex-end;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    margin-right: 20px;
+    margin-top: 0px;
+  }
 
   .switch {
     position: relative;
@@ -181,6 +208,7 @@
     width: 46px;
     height: 25px;
   }
+
   .slider:before {
     position: absolute;
     content: "";
@@ -192,14 +220,20 @@
     -webkit-transition: 0.4s;
     transition: 0.4s;
   }
-}
-.localStorageToggle:checked + .slider:before {
-  -webkit-transform: translateX(20px);
-  -ms-transform: translateX(20px);
-  transform: translateX(20px);
+
+  .localStorageToggle:checked + .slider:before {
+    -webkit-transform: translateX(20px);
+    -ms-transform: translateX(20px);
+    transform: translateX(20px);
+  }
+  .finalNumber {
+    font-family: "Open Sans", sans-serif;
+    font-size: 1.2rem;
+    text-decoration: solid;
+  }
 }
 
-@media (max-width: 1299px) and (min-width: 700px) {
+@media (max-width: 1299px) and (min-width: 900px) {
   .mobileInvisible {
     opacity: 1;
     visibility: visible;
@@ -208,13 +242,12 @@
   }
 
   .calculatedValuesContainer {
-    font-size: calc(10px + 6 * ((100vw - 620px) / 680));
+    font-size: 0.8rem;
     right: 20px;
     max-width: 40%;
-    height: 100%;
-    padding: 20px;
-    padding-top: 150px;
-    padding-bottom: 60px;
+    height: calc(100vh - 115px);
+    padding-top: 20px;
+    padding-bottom: 5%;
     background: rgba(228, 221, 215, 0.72);
     box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
     backdrop-filter: blur(13.9px);
@@ -223,8 +256,30 @@
 
   .sideBarHeadingH2 {
     margin: 0px;
+    width: 65%;
+    padding: 0;
+    padding-right: 10px;
+  }
+
+  .valueContainers {
     padding: 0px;
   }
+
+  .finalNumber {
+    font-family: "Open Sans", sans-serif;
+    font-size: 1.1rem;
+    text-decoration: solid;
+  }
+
+  .toggleContainer {
+    align-self: flex-end;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    margin-right: 20px;
+    margin-top: 0px;
+  }
+
   .switch {
     position: relative;
     display: inline-block;
@@ -261,8 +316,7 @@
   }
 }
 
-/* 
-@media (min-width: 900px) {
+@media (max-width: 899px) and (min-width: 700px) {
   .mobileInvisible {
     opacity: 1;
     visibility: visible;
@@ -271,20 +325,76 @@
   }
 
   .calculatedValuesContainer {
-    font-size: 0.9rem;
-    right: 0;
-    width: 40%;
-    height: 100%;
-    padding: 20px;
-    padding-top: 60px;
-    background: rgb(44, 137, 160);
+    font-size: 0.65rem;
+    right: 20px;
+    max-width: 43%;
+    height: calc(100vh - 115px);
+    padding-top: 15px;
+    padding-bottom: 5%;
+    background: rgba(228, 221, 215, 0.72);
     box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
     backdrop-filter: blur(13.9px);
     -webkit-backdrop-filter: blur(13.9px);
   }
 
   .sideBarHeadingH2 {
-    margin: 5px;
-    padding: 5px;
+    margin: 0px;
+    width: 65%;
+    padding: 0;
+    padding-right: 10px;
   }
-} */
+
+  .valueContainers {
+    padding: 0px;
+  }
+
+  .finalNumber {
+    font-family: "Open Sans", sans-serif;
+    font-size: 1rem;
+    text-decoration: solid;
+  }
+
+  .toggleContainer {
+    align-self: flex-end;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    margin-right: 20px;
+    margin-top: 0px;
+  }
+
+  .switch {
+    position: relative;
+    display: inline-block;
+    padding: 10px;
+    width: 46px;
+    height: 25px;
+  }
+  .slider:before {
+    position: absolute;
+    content: "";
+    height: 18px;
+    width: 18px;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    -webkit-transition: 0.4s;
+    transition: 0.4s;
+  }
+  .localStorageToggle:checked + .slider:before {
+    -webkit-transform: translateX(20px);
+    -ms-transform: translateX(20px);
+    transform: translateX(20px);
+  }
+
+  .hideSidebarComponentContainer {
+    display: none;
+    position: relative;
+    bottom: 15px;
+  }
+
+  .sidebarHidden {
+    transition: transform 0s ease-in-out;
+    transform: translate(0%, 0%);
+  }
+}

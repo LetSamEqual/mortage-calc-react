@@ -51,7 +51,7 @@ const SideBar = ({ data, setLocalStorage, toLocalStorage }) => {
           />
           <span className="slider round"></span>
         </label>
-        <p>
+        <p className="automaticSavesNotification">
           {toLocalStorage
             ? "Automatic saves are enabled"
             : "Automatic saves are disabled"}

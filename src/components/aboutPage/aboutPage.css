@@ -35,6 +35,11 @@
   margin-top: 20px;
 }
 
+.shareSocialButtonsContainer {
+  display: flex;
+  gap: 15px;
+}
+
 @media (min-width: 700px) {
   .aboutPageContainer {
     margin-top: 40px;

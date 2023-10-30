@@ -48,7 +48,7 @@ input:checked + .popoverDisplayedText {
 
 @media (min-width: 700px) {
   .popoverContainer {
-    z-index: 10;
+    z-index: 9;
   }
 
   .popoverDisplayedText {

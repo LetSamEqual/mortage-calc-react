@@ -2,7 +2,6 @@ import "./dropDown.css";
 
 import { Link, useLocation } from "react-router-dom";
 
-import Button from "../button/button";
 import { useEffect, useState } from "react";
 
 const DropDownMenu = ({ onClick }) => {

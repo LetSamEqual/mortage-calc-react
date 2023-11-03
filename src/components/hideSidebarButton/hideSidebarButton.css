@@ -5,18 +5,9 @@
   align-items: center;
 }
 
-/* .leftAngle {
-  width: 0;
-  height: 0;
-  border-top: 15px solid transparent;
-  border-bottom: 15px solid transparent;
-
-  border-right: 15px solid #ff595aff;
-} */
-
 .bottomAngle {
   background: #ff595aff;
-  height: 30px;
+  height: 40px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -25,17 +16,8 @@
   border: 1px solid rgb(222, 218, 218);
 }
 
-/* .rightAngle {
-  width: 0;
-  height: 0;
-  border-top: 15px solid transparent;
-  border-bottom: 15px solid transparent;
-
-  border-left: 15px solid #ff595aff;
-} */
-
 .hideSideBarButton {
-  width: 90px;
+  width: 120px;
   background: none;
   color: white;
   box-shadow: none;

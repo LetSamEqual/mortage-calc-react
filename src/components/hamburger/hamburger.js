@@ -7,7 +7,7 @@ const Hamburger = () => {
   const [dropDownClicked, setDropDownClicked] = useState(false);
   const [buttonDisabled, setButtonDisabled] = useState({
     calculator: true,
-    links: false,
+    resources: false,
     about: false,
   });
 
@@ -21,19 +21,19 @@ const Hamburger = () => {
     if (location.pathname === "/") {
       setButtonDisabled({
         calculator: true,
-        links: false,
+        resources: false,
         about: false,
       });
-    } else if (location.pathname === "/links") {
+    } else if (location.pathname === "/resources") {
       setButtonDisabled({
         calculator: false,
-        links: true,
+        resources: true,
         about: false,
       });
     } else if (location.pathname === "/about") {
       setButtonDisabled({
         calculator: false,
-        links: false,
+        resources: false,
         about: true,
       });
     }
@@ -58,11 +58,11 @@ const Hamburger = () => {
               label="Calculator"
             />
           </Link>
-          <Link to="/links">
+          <Link to="/resources">
             <Button
               onClick={onClick}
-              disabled={buttonDisabled.links}
-              label="Links"
+              disabled={buttonDisabled.resources}
+              label="Resources"
             />
           </Link>
           <Link to="/about">

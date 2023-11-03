@@ -13,7 +13,7 @@ function App() {
       <div className="contentContainer">
         <Routes>
           <Route path="/" element={<LandingPage />} />
-          <Route path="/links" element={<LinksPage />} />
+          <Route path="/resources" element={<LinksPage />} />
           <Route path="/about" element={<AboutPage />} />
         </Routes>
       </div>

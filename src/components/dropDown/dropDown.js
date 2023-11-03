@@ -17,19 +17,19 @@ const DropDownMenu = ({ onClick }) => {
     if (location.pathname === "/") {
       setButtonDisabled({
         calculator: true,
-        links: false,
+        resources: false,
         about: false,
       });
-    } else if (location.pathname === "/links") {
+    } else if (location.pathname === "/resources") {
       setButtonDisabled({
         calculator: false,
-        links: true,
+        resources: true,
         about: false,
       });
     } else if (location.pathname === "/about") {
       setButtonDisabled({
         calculator: false,
-        links: false,
+        resources: false,
         about: true,
       });
     }
@@ -50,8 +50,12 @@ const DropDownMenu = ({ onClick }) => {
           Calc
         </button>
       </Link>
-      <Link to="/links">
-        <button onClick={onClick} disabled={buttonDisabled.links} label="Links">
+      <Link to="/resources">
+        <button
+          onClick={onClick}
+          disabled={buttonDisabled.resources}
+          label="Resources"
+        >
           links
         </button>
       </Link>

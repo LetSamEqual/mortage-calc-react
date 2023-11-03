@@ -28,6 +28,9 @@ const SideBar = ({ data, setLocalStorage, toLocalStorage }) => {
     setSidebarHidden(!sidebarHidden);
   };
 
+  const negativeSavings =
+    monthlyContributions < 0 ? "negativeSavings" : "positiveSavings";
+
   return (
     <div
       className={`calculatedValuesContainer ${
@@ -64,57 +67,55 @@ const SideBar = ({ data, setLocalStorage, toLocalStorage }) => {
       </div>
       <h1 className="sideBarHeading">Your stats</h1>
       <div className="valueContainers">
-        <h2 className="sideBarHeadingH2 ">Simple net monthly income: </h2>
+        <h2 className="sideBarHeadingH2 ">Monthly income after tax: </h2>
         <span className="finalNumber">
           {convertOutputToCurrency(salaryAfterTax)}
         </span>
       </div>
 
       <div className="valueContainers">
-        <h2 className="sideBarHeadingH2">Mortgage amount: </h2>
+        <h2 className="sideBarHeadingH2">Mortgage amount:</h2>
         <span className="finalNumber">
           {convertOutputToCurrency(mortgageAmount)}
         </span>
       </div>
-
       <div className="valueContainers">
-        <h2 className="sideBarHeadingH2">Monthly mortgage repayments: </h2>
+        <h2 className="sideBarHeadingH2">Bank balance after purchase:</h2>
+        <span className="finalNumber">
+          {convertOutputToCurrency(bankBalanceAfterPurchase)}
+        </span>
+      </div>
+      <div className="valueContainers">
+        <h2 className="sideBarHeadingH2">Monthly mortgage repayments:</h2>
         <span className="finalNumber">
           {convertOutputToCurrency(monthlyMortgageRepayments)}
         </span>
       </div>
       <div className="valueContainers">
-        <h2 className="sideBarHeadingH2">Total monthly property expenses: </h2>
+        <h2 className="sideBarHeadingH2">Monthly property expenses:</h2>
         <span className="finalNumber">
           {convertOutputToCurrency(monthlyPropertyExpenses)}
         </span>
       </div>
 
       <div className="valueContainers">
-        <h2 className="sideBarHeadingH2">Total monthly personal expenses: </h2>
+        <h2 className="sideBarHeadingH2">Monthly personal expenses:</h2>
         <span className="finalNumber">
           {convertOutputToCurrency(monthlyPersonalExpenses)}
         </span>
       </div>
 
       <div className="valueContainers">
-        <h2 className="sideBarHeadingH2">Monthly contribution to savings: </h2>
-        <span className="finalNumber">
+        <h2 className="sideBarHeadingH2">Monthly contribution to savings:</h2>
+        <span className={`finalNumber ${negativeSavings}`}>
           {convertOutputToCurrency(monthlyContributions)}
         </span>
       </div>
 
       <div className="valueContainers">
-        <h2 className="sideBarHeadingH2 ">Annual contribution to savings: </h2>
-        <span className="finalNumber">
+        <h2 className="sideBarHeadingH2">Annual contribution to savings:</h2>
+        <span className={`finalNumber ${negativeSavings}`}>
           {convertOutputToCurrency(annualContributions)}
-        </span>
-      </div>
-
-      <div className="valueContainers">
-        <h2 className="sideBarHeadingH2 ">Bank balance after purchase: </h2>
-        <span className="finalNumber">
-          {convertOutputToCurrency(bankBalanceAfterPurchase)}
         </span>
       </div>
     </div>

@@ -12,6 +12,7 @@ import {
   calculateMonthlyContribution,
   calculateBankBalanceAfterPurchase,
 } from "../../utils/calcHelperFunctions";
+import SiteIntro from "../siteIntro/siteIntro";
 
 const Calculator = () => {
   const [mortgageCalculator, setMortgageCalculator] = useState({
@@ -88,6 +89,7 @@ const Calculator = () => {
   // converts calculation outputs to currency format on autofill
 
   // converts values to currency type in the same input field on blur
+
   const handleBlur = (e) => {
     let value = e.target.value;
     let name = e.target.name;
@@ -154,7 +156,7 @@ const Calculator = () => {
   const handleInput = (e) => {
     const name = e.target.name;
     let value = e.target.value;
-    if (typeof value === "string") {
+    if (typeof value === "string" && !value.includes(".")) {
       value = parseFloat(value);
     }
     if (isNaN(value) || value < 0) {
@@ -243,6 +245,7 @@ const Calculator = () => {
         setLocalStorage={setLocalStorage}
         toLocalStorage={toLocalStorage}
       />
+      <SiteIntro />
       <div className="formContainer">
         <h2 className="formLabels">Income/assets</h2>
         <form className="calculationContainer">
@@ -308,14 +311,6 @@ const Calculator = () => {
           <span className="errorMessage"> </span>
         </form>
       </div>
-      <div className="adSquare">
-        <a href="https://www.crazydomains.com.au?a=KRVS2cLNZcSNVJ7ms12%2F2pURgIDjGV0kF%2FYCa73xLp4%3D">
-          <img
-            src="//framework.dreamscape.cloud/design_framework/images/crazy/affiliates/336x280/new_domains.png"
-            alt="New Domains"
-          />
-        </a>
-      </div>
       <div className="formContainer">
         <h2 className="formLabels">Property expenses</h2>
         <form className="calculationContainer">
@@ -347,13 +342,14 @@ const Calculator = () => {
             onBlur={handleBlur}
             onFocus={handleFocus}
             onKeyDown={handleKeydown}
+            required
           ></input>
           <span className="errorMessage"> </span>
           <div className="popoverComponent">
             <label>Interest rate</label>
             <Popover
               displayedText={
-                "We recommended also checking an interest rate 1–4% higher than offered to account for any potential fluctuations in the market."
+                "As interest rates can change over the lifespan of a mortgage, we recommend also exploring the effect of a 1–4% rate rise."
               }
             />
           </div>
@@ -415,9 +411,9 @@ const Calculator = () => {
           ></input>
           <span className="errorMessage"> </span>
           <div className="popoverComponent">
-            <label>Lenders Mortgage Insurance (LMI), if paid monthly </label>
+            <label>LMI, if paid monthly</label>
             <Popover
-              displayedText={"See the links page for more information"}
+              displayedText={"See the links page for more information."}
             />
           </div>
           <input
@@ -440,8 +436,6 @@ const Calculator = () => {
         <h2 className="formLabels">Personal expenses</h2>
 
         <form className="calculationContainer">
-          <h3 className="billsFormLabels">Bills</h3>
-
           <label>Power</label>
           <input
             type="text"
@@ -670,9 +664,6 @@ const Calculator = () => {
           <span className="errorMessage"> </span>
         </form>
       </div>
-      <div className="secondAdContainer">
-        <h2>Ad sense</h2>
-      </div>
 
       <div className="formContainer">
         <h2 className="formLabels">Purchase budget</h2>
@@ -680,7 +671,7 @@ const Calculator = () => {
           <div className="popoverComponent">
             <label>Transfer/stamp duty</label>
             <Popover
-              displayedText={"See the links page for more information"}
+              displayedText={"See the links page for more information."}
             />
           </div>
           <input
@@ -700,7 +691,7 @@ const Calculator = () => {
           <div className="popoverComponent">
             <label>Legal/conveyancer fees</label>
             <Popover
-              displayedText={"See the links page for more information"}
+              displayedText={"See the links page for more information."}
             />
           </div>
           <input
@@ -720,7 +711,7 @@ const Calculator = () => {
           <div className="popoverComponent">
             <label>Property reports</label>
             <Popover
-              displayedText={`See the links page for more information`}
+              displayedText={`See the links page for more information.`}
             />
           </div>
           <input
@@ -797,19 +788,47 @@ const Calculator = () => {
       </div>
       <div className="disclaimersContainer">
         <h2>Disclaimers and notes</h2>
+        <p>
+          The information on this site constitutes general information only.
+          MortgageBudget.com.au is not a financial adviser and the advice given
+          by this site should not be considered professional advice. Further,
+          the calculations and tools on this site are intended to provide
+          general information only, and should not be substituted for
+          professional advice. MortgageBudget.com.au provides no warranties and
+          makes no representation that the information and tools here are
+          appropriate for your circumstances or are intended to indicate a
+          particular course of action. You should consider seeking independent
+          legal, financial, taxation and/or other advice to see how the
+          information given here relates to your personal circumstances.
+        </p>
+        <p>
+          MortgageBudget.com.au also provides links to third-party sites for
+          your convenience throughout the MortgageBudget website. While we
+          choose these sites carefully, we do not endorse or represent these
+          external sites. We encourage you to examine the copywrite, privacy and
+          disclaimer notices on those website.
+        </p>
         <ol>
           <li id="firstDisclaimer">
-            The rates used here are for Australian residents only.
+            The tax rates used here are for Australian residents only, and use
+            the 2022–2023 Australian marginal tax rates. This calculation
+            includes the 2 per cent Medicare levy – the standard rate for most
+            individual taxpayers – and does not take into account family income
+            or dependents. The calculation does not include the Medicare Levy
+            Surcharge, which is an additional levy of 1 to 1.5 per cent applied
+            to higher income individuals and families who do not have private
+            health insurance. Further, the calculation does not factor in any
+            tax rebates or offsets you may be entitled to.
           </li>
           <li id="secondDisclaimer">
-            By default, this site saves the information entered above to your
-            personal device. The information is not stored externally by this
-            site or provided to third parties. This feature exists solely to
-            ensure a seamless experience between uses. You can disable this
-            feature and delete any data saved to your device by this site (other
-            than your preference to use this site with this default feature
-            disabled) by using the toggle button at the top right of the ’Your
-            stats‘ window on this page.
+            By default, this site saves the information entered above to your{" "}
+            <strong>device and your device only</strong>. The information is not
+            stored externally by this site or provided to third parties. This
+            feature exists solely to ensure a seamless experience between uses.
+            You can disable this feature and delete any data saved to your
+            device by this site (other than your preference to use this site
+            with this default feature disabled) by using the toggle button at
+            the top right of the ’Your stats‘ window on this page.
           </li>
         </ol>
       </div>

@@ -9,7 +9,7 @@
   height: auto;
   padding-left: 20px;
   padding-bottom: 15px;
-  font-size: calc(10px + 6 * ((100vw - 520px) / 680));
+  font-size: 0.55rem;
   font-family: "Open Sans", "Montserrat", sans-serif;
   color: black;
   z-index: 5;
@@ -57,6 +57,14 @@
   padding-right: 10px;
   display: inline;
   width: 70%;
+}
+
+.negativeSavings {
+  color: red;
+}
+
+.positiveSavings {
+  color: green;
 }
 
 /* .mobileInvisible {
@@ -130,7 +138,9 @@
 }
 
 .automaticSavesNotification {
-  font-size: 0.8rem;
+  font-size: 0.9rem;
+  margin-top: 4px;
+  margin-bottom: 15px;
 }
 
 .superscript {
@@ -150,12 +160,12 @@
 
 .hideSidebarComponentContainer {
   position: relative;
-  bottom: 15px;
+  bottom: 20px;
 }
 
 .sidebarHidden {
   transition: transform 0.4s ease-in-out;
-  transform: translate(0%, 95%);
+  transform: translate(0%, 85%);
 }
 .localStorageToggle:checked + .slider:before {
   -webkit-transform: translateX(20px);
@@ -230,6 +240,10 @@
     font-family: "Open Sans", sans-serif;
     font-size: 1.2rem;
     text-decoration: solid;
+  }
+  .sidebarHidden {
+    transition: transform 0s ease-in-out;
+    transform: translate(0%, 0%);
   }
 }
 

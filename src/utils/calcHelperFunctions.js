@@ -30,10 +30,10 @@ const calculateSalaryAfterTax = (userSalary, otherIncome) => {
   }
   if (salary > 18200 && salary < 45001) {
     let medicareLevy = salary * 0.02;
-    console.log("medicare levy: " + medicareLevy);
+
     let firstBracket = salary - 18200;
     let firstBracketTaxRate = firstBracket * 0.19 + medicareLevy;
-    console.log("income tax payable: " + firstBracketTaxRate);
+
     let firstBracketTotalSalary = Math.ceil(
       (salary - firstBracketTaxRate) / 12
     );
@@ -111,7 +111,6 @@ const calculateMonthlyMortgageRepayments = (mortgage, interest, years) => {
   if (mortgageAmount <= 0 || interestRate <= 0 || mortageInYears <= 0) {
     return 0;
   }
-  console.log(mortgageAmount);
   const numberOfMortgagePayments = mortageInYears * 12;
   const interestRateInDecimal = interestRate / 100;
   const annualInterestRate = interestRateInDecimal / 12;

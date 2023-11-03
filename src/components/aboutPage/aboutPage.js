@@ -1,60 +1,39 @@
+import SocialButtons from "../socialButtons/socialbuttons";
 import "./aboutPage.css";
 
-import {
-  FacebookShareButton,
-  FacebookIcon,
-  TwitterShareButton,
-  TwitterIcon,
-  LinkedinShareButton,
-  LinkedinIcon,
-} from "react-share";
-
 const AboutPage = () => {
-  const shareUrl = "mortgagebudget.com.au";
-  const title =
-    "Finally managed to organise my finances for buying a home. Thanks mortgagebudget.com.au!";
   return (
     <div className="contentWrapper">
-      <div className="adContainer">
-        <h2>Ad sense</h2>
-      </div>
-      <div className="aboutPageContainer">
-        <h3 className="aboutPageHeader">About this calculator</h3>
-        <div className="aboutPage">
-          <p>
-            This tool was created to help you buy a property to live in taking
-            everything into account all in one place.
-          </p>
-          <p>
-            I built this calculator in excel when looking to buy my first
-            property. After sending it to friends who found it helpful I decided
-            to put it online free so others can use the tool.
-          </p>
-          <p>Hope it helps!</p>
-          <p>
-            If you find this tool helpful please send to friends or family who
-            are looking to buy a property.
-          </p>
-          <div className="shareSocialButtonsContainer">
-            <FacebookShareButton
-              url={shareUrl}
-              quote={title}
-              hashtag={"#realestate"}
-            >
-              <FacebookIcon size={32} square />
-            </FacebookShareButton>
-            <TwitterShareButton
-              url={shareUrl}
-              title={title}
-              hashtags={["mortgage", "realestate", "property", "finance"]}
-            >
-              <TwitterIcon size={32} square />
-            </TwitterShareButton>
-            <LinkedinShareButton url={shareUrl} title={title}>
-              <LinkedinIcon size={32} square />
-            </LinkedinShareButton>
-          </div>
-        </div>
+      <div className="aboutPage">
+        <h4>“Why does buying a house have to be so bloody hard?”</h4>
+        <p>That’s the question that started this project. </p>
+        <p>
+          After the inspections, the agents, the banks, interest rates, strata,
+          stamp duty, insurance, fees and fees and even more fees – you can’t be
+          blamed for feeling a bit dizzy at the end of it.
+        </p>
+        <p>MortgageBudget.com.au was built to make it just a little easier.</p>
+        <p>
+          What began as an Excel spreadsheet on someone’s computer became an
+          email attachment sent to a friend. Then it was a file on Google Drive
+          being shared between people we knew.
+        </p>
+        <p>Eventually we thought, “why stop there?”.</p>
+        <p>
+          The final product is a free site, built by experts but designed by
+          home buyers who wish they knew all of this before they got started.
+        </p>
+        <p>
+          We hope this site is and continues to be useful to anyone who needs
+          it.
+        </p>
+        <p>
+          If you have found this tool helpful then we’d love it if you used the
+          links below to share it with any friends or family who might find it
+          helpful too.
+        </p>
+        <p>Happy house hunting!</p>
+        <SocialButtons />
       </div>
     </div>
   );

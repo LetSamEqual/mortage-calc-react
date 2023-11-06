@@ -566,12 +566,12 @@ const Calculator = () => {
           <label>Home insurance</label>
           <input
             type="text"
-            name="insurance"
+            name="homeInsurance"
             placeholder="$0.00"
             className="greenBorderFocus"
             maxLength="9"
             inputMode="numeric"
-            value={mortgageCalculator.insurance}
+            value={mortgageCalculator.homeInsurance}
             onChange={handleInput}
             onBlur={handleBlur}
             onFocus={handleFocus}

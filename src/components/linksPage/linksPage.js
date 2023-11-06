@@ -29,7 +29,7 @@ const LinksPage = () => {
               >
                 calculator
               </a>{" "}
-              developed by our trusted partner{" "}
+              developed by{" "}
               <a
                 href="https://conveyancing.com.au/"
                 target="_blank"
@@ -103,11 +103,11 @@ const LinksPage = () => {
           <h2 className="linkContainerHeading">Legal fees</h2>
           <div className="linksContainer">
             <p>
-              Legal fees are an unfortunate but necessary part of buying
-              property. With all the paperwork and fine print involved, having
-              someone who can work with you to translate it is essential to
-              ensure you don’t get into any trouble down the line. This is where
-              conveyancers and solictors come in.
+              Legal fees are a necessary part of buying property. With all the
+              paperwork and fine print involved, having someone who can work
+              with you to translate it is essential to ensure you don’t get into
+              any trouble down the line. This is where conveyancers and
+              solictors come in.
             </p>
 
             <p>
@@ -154,7 +154,7 @@ const LinksPage = () => {
             </p>
             <p>
               <a
-                href="https://www.boq.com.au/blog/property/solicitor-conveyancer#:~:text=As%20opposed%20to%20a%20conveyancer,ordinary%20issues%20or%20complex%20sales"
+                href="https://www.boq.com.au/blog/property/solicitor-conveyancer"
                 target="_blank"
                 rel="noreferrer"
               >
@@ -196,9 +196,9 @@ const LinksPage = () => {
                 Conveyancing.com.au
               </a>
             </p>
-            {/* <p>Solicitor (all states): coming soon</p> */}
+
             <p>
-              Solicitor (NSW, Sydney):{" "}
+              Conveyancer (NSW, Sydney):{" "}
               <a
                 href="https://www.cmlaw.com.au/"
                 target="_blank"
@@ -207,12 +207,7 @@ const LinksPage = () => {
                 CM Law
               </a>
             </p>
-            {/* <p>Solicitor (ACT): coming soon</p>
-            <p>Solicitor (NT): coming soon</p>
-            <p>Solicitor (Qld): coming soon</p>
-            <p>Solicitor (Tas): coming soon</p>
-            <p>Solicitor (Vic): coming soon</p>
-            <p>Solicitor (WA): coming soon</p> */}
+            <h4>More coming soon</h4>
           </div>
         </div>
         <div className="allLinkContainers">
@@ -289,15 +284,6 @@ const LinksPage = () => {
                 loans.com.au
               </a>
             </p>
-            <p>
-              <a
-                href="https://insurancecouncil.com.au/resource/lenders-mortgage-insurance/"
-                target="_blank"
-                rel="noreferrer"
-              >
-                Insurance Council (resources)
-              </a>
-            </p>
           </div>
         </div>
         <div className="allLinkContainers">
@@ -315,10 +301,10 @@ const LinksPage = () => {
               apartment block, strata reports will provide a full review of the
               Owners Corporation records, including information about the
               condition of the common areas and the strata’s finances, along
-              with the minutes from strata meetings. These can cost between $40
-              to $400, however you’ll usually pay a smaller fee to access the
-              strata report before locking yourself into a contract, while the
-              remaining cost is paid if you purchase the property.
+              with the minutes from strata meetings. These can cost up to $450
+              to order a report, however you usually pay a smaller fee of around
+              $50 to access the report before locking yourself into a contract,
+              while the remaining cost is paid if you purchase the property.
             </p>
             <b>Property reports</b>
             <p>
@@ -328,6 +314,16 @@ const LinksPage = () => {
               sell the property. Much like a strata report, you can access it
               for a smaller fee as a prospective buyer, but you will pay a
               larger sum once you purchase the property.
+            </p>
+          </div>
+        </div>
+        <div className="allLinkContainers">
+          <h2 className="linkContainerHeading">Mortgage brokers</h2>
+          <div className="linksContainer">
+            <h4>Coming soon!</h4>
+            <p>
+              Check back in soon as we find other ways to help you on your
+              housing journey.
             </p>
           </div>
         </div>

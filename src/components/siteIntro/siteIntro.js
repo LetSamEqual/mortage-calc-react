@@ -11,7 +11,8 @@ const SiteIntro = () => {
       <p className="introParaText">
         MortgageBudget.com.au was designed to do away with the complicated
         spreadsheets and formulas that go into buying a home, so you can get a
-        clear picture of your finances, without the hassle.
+        clear picture of your finances, without the hassle. Fill in your budget
+        details below to see what you can afford.
       </p>
       <p className="introParaText">
         This site was developed by the people who know what goes into purchasing
@@ -25,9 +26,9 @@ const SiteIntro = () => {
         house hunting!
       </p>
       <p className="introParaText">
-        (P.S. If you like what we’ve built here and know someone who would
+        P.S. If you like what we’ve built here and know someone who would
         benefit from it, then we’d love if you could pass us on to them using
-        the links below.)
+        the links below.
       </p>
       <div className="socialButtonsComponentContainer">
         <SocialButtons />

@@ -22,7 +22,7 @@ const Calculator = () => {
     propertyPrice: 0,
     deposit: 0,
     interestRate: 0,
-    lengthOfMortgage: 0,
+    lengthOfMortgage: 30,
     strataPerQuarter: 0,
     councilTaxPerQuarter: 0,
     LMIIfPaidMonthly: 0,
@@ -329,7 +329,14 @@ const Calculator = () => {
             onKeyDown={handleKeydown}
           ></input>
           <span className="errorMessage"> </span>
-          <label>Deposit</label>
+          <div className="popoverComponent">
+            <label>Deposit</label>
+            <Popover
+              displayedText={
+                "If less than 20% of purchase price you may need LMI. See resources."
+              }
+            />
+          </div>
           <input
             type="text"
             name="deposit"
@@ -366,7 +373,7 @@ const Calculator = () => {
             onKeyDown={handleKeydown}
           ></input>
           <span className="errorMessage"> </span>
-          <label>Length of mortgage</label>
+          <label>Length of mortgage (years)</label>
           <input
             type="text"
             name="lengthOfMortgage"
@@ -413,7 +420,7 @@ const Calculator = () => {
           <div className="popoverComponent">
             <label>LMI, if paid monthly</label>
             <Popover
-              displayedText={"See the links page for more information."}
+              displayedText={"See the resources page for more information."}
             />
           </div>
           <input
@@ -433,7 +440,7 @@ const Calculator = () => {
         </form>
       </div>
       <div className="formContainer">
-        <h2 className="formLabels">Personal expenses</h2>
+        <h2 className="formLabels">Monthly personal expenses</h2>
 
         <form className="calculationContainer">
           <label>Power</label>
@@ -671,7 +678,7 @@ const Calculator = () => {
           <div className="popoverComponent">
             <label>Transfer/stamp duty</label>
             <Popover
-              displayedText={"See the links page for more information."}
+              displayedText={"See the resources page for more information."}
             />
           </div>
           <input
@@ -691,7 +698,7 @@ const Calculator = () => {
           <div className="popoverComponent">
             <label>Legal/conveyancer fees</label>
             <Popover
-              displayedText={"See the links page for more information."}
+              displayedText={"See the resources page for more information."}
             />
           </div>
           <input
@@ -711,7 +718,7 @@ const Calculator = () => {
           <div className="popoverComponent">
             <label>Property reports</label>
             <Popover
-              displayedText={`See the links page for more information.`}
+              displayedText={`See the resources page for more information.`}
             />
           </div>
           <input
@@ -773,13 +780,13 @@ const Calculator = () => {
             onKeyDown={handleKeydown}
           ></input>
           <span className="errorMessage"> </span>
-          <label>Notes (max 250 characters)</label>
+          <label>Notes (max 600 characters)</label>
           <textarea
             name="text"
             rows="13"
             cols="10"
             wrap="soft"
-            maxLength="250"
+            maxLength="600"
             className="additionalNotes"
             value={mortgageCalculator.notes}
             onChange={handleInputTextField}
@@ -821,11 +828,11 @@ const Calculator = () => {
             tax rebates or offsets you may be entitled to.
           </li>
           <li id="secondDisclaimer">
-            By default, this site saves the information entered above to your{" "}
-            <strong>device and your device only</strong>. The information is not
-            stored externally by this site or provided to third parties. This
-            feature exists solely to ensure a seamless experience between uses.
-            You can disable this feature and delete any data saved to your
+            By default, this site saves the information entered above to{" "}
+            <strong>your device and your device only</strong>. The information
+            is not stored externally by this site or provided to third parties.
+            This feature exists solely to ensure a seamless experience between
+            uses. You can disable this feature and delete any data saved to your
             device by this site (other than your preference to use this site
             with this default feature disabled) by using the toggle button at
             the top right of the ’Your stats‘ window on this page.

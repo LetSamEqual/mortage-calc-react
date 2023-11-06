@@ -13,7 +13,7 @@ import {
 const SocialButtons = () => {
   const shareUrl = "mortgagebudget.com.au";
   const title =
-    "Finally managed to organise my finances for buying a home. Thanks mortgagebudget.com.au!";
+    "This tool really helped me get my budget in order, thought you might want to give it a try.";
   return (
     <div className="shareSocialButtonsContainer">
       <FacebookShareButton url={shareUrl} quote={title} hashtag={"#realestate"}>

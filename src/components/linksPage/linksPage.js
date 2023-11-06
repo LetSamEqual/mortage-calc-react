@@ -9,7 +9,7 @@ const LinksPage = () => {
           <div className="linksContainer">
             <p>
               Stamp duty, also known as land transfer duty, is a tax that state
-              and territory governments charge for certain documents and
+              and territory governments apply to certain documents and
               transactions.
             </p>
             <p>

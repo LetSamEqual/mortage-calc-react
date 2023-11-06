@@ -18,6 +18,8 @@
 }
 
 .mortgageLogo {
+  position: relative;
+  top: 2px;
   pointer-events: none;
   transform: scale(0.7);
 }
@@ -35,7 +37,8 @@
   }
 
   .mortgageLogo {
-    top: 0;
+    position: relative;
+    top: 2px;
     transform: scale(0.85);
     pointer-events: none;
   }

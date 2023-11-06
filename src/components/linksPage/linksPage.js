@@ -29,7 +29,7 @@ const LinksPage = () => {
               >
                 calculator
               </a>{" "}
-              developed by our trusted partner
+              developed by our trusted partner{" "}
               <a
                 href="https://conveyancing.com.au/"
                 target="_blank"

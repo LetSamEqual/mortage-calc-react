@@ -16,16 +16,16 @@ const AboutPage = () => {
         <p>
           What began as an Excel spreadsheet on someone’s computer became an
           email attachment sent to a friend. Then it was a file on Google Drive
-          being shared between people we knew.
+          being shared between people we knew.
         </p>
         <p>Eventually we thought, “why stop there?”.</p>
         <p>
           The final product is a free site, built by experts but designed by
-          home buyers who wish they knew all of this before they got started.
+          home buyers who wish they knew all of this before they got started.
         </p>
         <p>
-          We hope this site is and continues to be useful to anyone who needs
-          it.
+          We hope this site is and continues to be useful to anyone who
+          needs it.
         </p>
         <p>
           If you have found this tool helpful then we’d love it if you used the

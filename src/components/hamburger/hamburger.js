@@ -17,7 +17,30 @@ const Hamburger = () => {
 
   const location = useLocation();
 
-  const changeDisabledButtons = () => {
+  // const changeDisabledButtons = () => {
+  //   if (location.pathname === "/") {
+  //     setButtonDisabled({
+  //       calculator: true,
+  //       resources: false,
+  //       about: false,
+  //     });
+  //   } else if (location.pathname === "/resources") {
+  //     setButtonDisabled({
+  //       calculator: false,
+  //       resources: true,
+  //       about: false,
+  //     });
+  //   } else if (location.pathname === "/about") {
+  //     setButtonDisabled({
+  //       calculator: false,
+  //       resources: false,
+  //       about: true,
+  //     });
+  //   }
+  //   setDropDownClicked(false);
+  // };
+
+  useEffect(() => {
     if (location.pathname === "/") {
       setButtonDisabled({
         calculator: true,
@@ -38,10 +61,6 @@ const Hamburger = () => {
       });
     }
     setDropDownClicked(false);
-  };
-
-  useEffect(() => {
-    changeDisabledButtons();
   }, [location]);
 
   return (

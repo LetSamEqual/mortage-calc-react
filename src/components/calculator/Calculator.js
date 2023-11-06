@@ -33,13 +33,16 @@ const Calculator = () => {
     phone: 0,
     accounts: 0,
     memberships: 0,
-    insurance: 0,
+    homeInsurance: 0,
     repayments: 0,
     food: 0,
     entertainment: 0,
     travel: 0,
-    household: 0,
-    vehicle: 0,
+    clothing: 0,
+    vehicleInsurance: 0,
+    fuel: 0,
+    rego: 0,
+    servicingParts: 0,
     other: 0,
     transferStampDuty: 0,
     legalConveyancerFees: 0,
@@ -149,7 +152,19 @@ const Calculator = () => {
       e.target.value = parseValue;
       setMortgageCalculator({ ...mortgageCalculator, [name]: parseValue });
     }
-    // e.target.setSelectionRange(0, 9999);
+    if (
+      navigator.userAgent.match(/Android/i) ||
+      navigator.userAgent.match(/webOS/i) ||
+      navigator.userAgent.match(/iPhone/i) ||
+      navigator.userAgent.match(/iPad/i) ||
+      navigator.userAgent.match(/iPod/i) ||
+      navigator.userAgent.match(/BlackBerry/i) ||
+      navigator.userAgent.match(/Windows Phone/i)
+    ) {
+      return;
+    }
+
+    e.target.setSelectionRange(0, 9999);
   };
 
   // updates corresponding state field based on change to input fields
@@ -548,7 +563,7 @@ const Calculator = () => {
             onKeyDown={handleKeydown}
           ></input>
           <span className="errorMessage"> </span>
-          <label>Insurance</label>
+          <label>Home insurance</label>
           <input
             type="text"
             name="insurance"
@@ -624,30 +639,75 @@ const Calculator = () => {
             onKeyDown={handleKeydown}
           ></input>
           <span className="errorMessage"> </span>
-          <label>Household</label>
+          <label>Clothing</label>
           <input
             type="text"
-            name="household"
+            name="clothing"
             placeholder="$0.00"
             className="greenBorderFocus"
             maxLength="9"
             inputMode="numeric"
-            value={mortgageCalculator.household}
+            value={mortgageCalculator.clothing}
             onChange={handleInput}
             onBlur={handleBlur}
             onFocus={handleFocus}
             onKeyDown={handleKeydown}
           ></input>
           <span className="errorMessage"> </span>
-          <label>Vehicle(s)</label>
+          <label>Vehicle insurance (monthly)</label>
           <input
             type="text"
-            name="vehicle"
+            name="vehicleInsurance"
             placeholder="$0.00"
             className="greenBorderFocus"
             maxLength="9"
             inputMode="numeric"
-            value={mortgageCalculator.vehicle}
+            value={mortgageCalculator.vehicleInsurance}
+            onChange={handleInput}
+            onBlur={handleBlur}
+            onFocus={handleFocus}
+            onKeyDown={handleKeydown}
+          ></input>
+          <span className="errorMessage"> </span>
+          <label>Fuel (monthly)</label>
+          <input
+            type="text"
+            name="fuel"
+            placeholder="$0.00"
+            className="greenBorderFocus"
+            maxLength="9"
+            inputMode="numeric"
+            value={mortgageCalculator.fuel}
+            onChange={handleInput}
+            onBlur={handleBlur}
+            onFocus={handleFocus}
+            onKeyDown={handleKeydown}
+          ></input>
+          <span className="errorMessage"> </span>
+          <label>Rego (yearly)</label>
+          <input
+            type="text"
+            name="rego"
+            placeholder="$0.00"
+            className="greenBorderFocus"
+            maxLength="9"
+            inputMode="numeric"
+            value={mortgageCalculator.rego}
+            onChange={handleInput}
+            onBlur={handleBlur}
+            onFocus={handleFocus}
+            onKeyDown={handleKeydown}
+          ></input>
+          <span className="errorMessage"> </span>
+          <label>Servicing and parts (yearly)</label>
+          <input
+            type="text"
+            name="servicingParts"
+            placeholder="$0.00"
+            className="greenBorderFocus"
+            maxLength="9"
+            inputMode="numeric"
+            value={mortgageCalculator.servicingParts}
             onChange={handleInput}
             onBlur={handleBlur}
             onFocus={handleFocus}

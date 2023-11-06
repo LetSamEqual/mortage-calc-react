@@ -7,7 +7,6 @@
   bottom: 0;
   width: 100%;
   height: auto;
-  padding-left: 20px;
   padding-bottom: 15px;
   font-size: 0.55rem;
   font-family: "Open Sans", "Montserrat", sans-serif;
@@ -185,7 +184,7 @@
     font-size: 0.85rem;
     right: 20px;
     width: 40%;
-    height: calc(100vh - 90px);
+    height: calc(100vh - 80px);
     padding-top: 20px;
     padding-bottom: 5%;
     background: rgba(228, 221, 215, 0.72);
@@ -259,7 +258,7 @@
     font-size: 0.8rem;
     right: 20px;
     max-width: 40%;
-    height: calc(100vh - 115px);
+    height: calc(100vh - 100px);
     padding-top: 20px;
     padding-bottom: 5%;
     background: rgba(228, 221, 215, 0.72);
@@ -342,7 +341,7 @@
     font-size: 0.65rem;
     right: 20px;
     max-width: 43%;
-    height: calc(100vh - 115px);
+    height: calc(100vh - 100px);
     padding-top: 15px;
     padding-bottom: 5%;
     background: rgba(228, 221, 215, 0.72);

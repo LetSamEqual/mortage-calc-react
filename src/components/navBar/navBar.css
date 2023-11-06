@@ -24,6 +24,12 @@
   transform: scale(0.7);
 }
 
+.mortgageLogoButton {
+  background-color: none;
+  border: none;
+  background: none;
+}
+
 .hamburgerComponent {
   position: absolute;
   top: 15px;

@@ -1,13 +1,9 @@
 import SocialButtons from "../socialButtons/socialbuttons";
 import "./aboutPage.css";
-import AdSenseBlock from "../adSenseBlock/adSenseBlock";
-import { useLocation } from "react-router-dom";
 
 const AboutPage = () => {
-  const location = useLocation();
   return (
     <div className="contentWrapper">
-      <AdSenseBlock props={location.pathname} />
       <div className="aboutPage">
         <h4>“Why does buying a house have to be so bloody hard?”</h4>
         <p>That’s the question that started this project. </p>

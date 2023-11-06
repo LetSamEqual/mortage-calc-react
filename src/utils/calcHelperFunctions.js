@@ -172,15 +172,39 @@ const calculateMonthlyPersonalExpenses = ({
   phone,
   accounts,
   memberships,
-  insurance,
+  homeInsurance,
   repayments,
   food,
   entertainment,
   travel,
-  household,
-  vehicle,
+  clothing,
+  vehicleInsurance,
+  fuel,
+  rego,
+  servicingParts,
   other,
 }) => {
+  let yearlyRego = rego;
+  let yearlyServicing = servicingParts;
+
+  if (typeof yearlyRego === "string") {
+    yearlyRego = parseFloat(yearlyRego.replace(/[$,]/g, ""));
+  }
+
+  if (typeof yearlyRego !== "number") {
+    yearlyRego = parseFloat(yearlyRego);
+  }
+
+  if (typeof yearlyServicing === "string") {
+    yearlyServicing = parseFloat(yearlyServicing.replace(/[$,]/g, ""));
+  }
+  if (typeof yearlyServicing !== "number") {
+    yearlyServicing = parseFloat(yearlyServicing);
+  }
+
+  const monthlyRego = yearlyRego / 12;
+  const monthlyServicing = yearlyServicing / 12;
+
   const expensesArray = [
     power,
     water,
@@ -189,13 +213,16 @@ const calculateMonthlyPersonalExpenses = ({
     phone,
     accounts,
     memberships,
-    insurance,
+    homeInsurance,
     repayments,
     food,
     entertainment,
     travel,
-    household,
-    vehicle,
+    clothing,
+    vehicleInsurance,
+    fuel,
+    monthlyRego,
+    monthlyServicing,
     other,
   ];
 

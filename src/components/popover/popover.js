@@ -6,6 +6,9 @@ const Popover = ({ displayedText }) => {
 
   const popoverClickHandler = () => {
     setShowPopover(!showPopover);
+    setTimeout(() => {
+      setShowPopover(false);
+    }, 5000);
   };
 
   return (

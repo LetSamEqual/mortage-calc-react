@@ -1,5 +1,6 @@
 import "./navBar.css";
 import { ReactComponent as MortgageLogo2 } from "../../MBLogo_2.svg";
+import { Link } from "react-router-dom";
 
 import Hamburger from "../hamburger/hamburger";
 
@@ -8,7 +9,11 @@ const NavBar = () => {
     <div>
       <div className="navBarContainer">
         <div className="mortgageLogoContainer">
-          <MortgageLogo2 className="mortgageLogo" />
+          <Link to="/">
+            <button className="mortgageLogoButton">
+              <MortgageLogo2 className="mortgageLogo" />
+            </button>
+          </Link>
         </div>
         <Hamburger className="hamburgerComponent" />
       </div>

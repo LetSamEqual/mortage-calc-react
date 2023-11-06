@@ -5,7 +5,6 @@ import { useLocation } from "react-router-dom";
 
 const AboutPage = () => {
   const location = useLocation();
-  const pathname = location.pathname;
   return (
     <div className="contentWrapper">
       <AdSenseBlock props={location.pathname} />

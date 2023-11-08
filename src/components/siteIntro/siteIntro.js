@@ -11,8 +11,8 @@ const SiteIntro = () => {
       <p className="introParaText">
         MortgageBudget.com.au was designed to do away with the complicated
         spreadsheets and formulas that go into buying a home, so you can get a
-        clear picture of your finances, without the hassle. Fill in your budget
-        details below to see what you can afford.
+        clear picture of your finances, without the hassle. Fill in your
+        mortgage budget below to see what property you can afford.
       </p>
       <p className="introParaText">
         This site was developed by the people who know what goes into purchasing

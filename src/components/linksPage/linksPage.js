@@ -1,8 +1,31 @@
 import "./linksPage.css";
+import { Helmet } from "react-helmet-async";
 
 const LinksPage = () => {
   return (
     <div className="contentWrapper">
+      <Helmet>
+        <meta
+          name="description"
+          content="Learn what goes into buying a home, from stamp duty to lenders mortgage insurance to conveyancers, solicitors and more. MortgageBudget.com.au helps prepare you for the property market."
+        />
+        <meta
+          name="keywords"
+          content="mortgage, stamp duty, conveyancing, solicitors, lenders mortage insurance"
+        />
+        <meta
+          property="og:title"
+          content="Learn the tips, tricks and requirements for buying a home"
+        />
+        <meta
+          property="og:url"
+          content="https://mortgagebudget.com.au/resources"
+        />
+        <meta
+          property="og:description"
+          content="Learn what goes into buying a home, from stamp duty to conveyancing to lenders mortgage insurance."
+        />
+      </Helmet>
       <div className="linksPageContainer">
         <div className="allLinkContainers">
           <h2 className="linkContainerHeading">Transfer/stamp duty</h2>
